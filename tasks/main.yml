@@ -1,0 +1,37 @@
+---
+- include_tasks: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include_tasks: archlinux.yml
+  when: ansible_os_family == 'Archlinux'
+
+- name: Ensure git installed
+  package:
+    name: git
+    state: present
+
+- name: Clone polybar from github
+  ansible.builtin.git:
+    repo: "https://github.com/polybar/polybar.git"
+    dest: /tmp/polybar
+
+- name: create ~/.config/polybar
+  file:
+    path: "~/.config/polybar/"
+    state: directory
+  tags: [ 'polybar' ]
+
+- name: Generate polybar config files
+  template:
+    src: "{{ item }}.j2"
+    dest: "~/.config/polybar/{{ item }}"
+  with_items:
+    - launch.sh
+    - config
+  tags: [ 'polybar' ]
+
+- name: Make polybar launch.sh executable
+  file:
+    path: "~/.config/polybar/launch.sh"
+    mode: a+x
+  tags: [ 'polybar' ]
