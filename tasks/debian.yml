@@ -1,4 +1,5 @@
 ---
+# https://github.com/polybar/polybar/wiki/Compiling
 - name: Update Repository cache when Ubuntu
   apt:
     update_cache: true
@@ -32,3 +33,16 @@
   get_url:
     url: "https://github.com/polybar/polybar/releases/download/{{ polybar.version }}/polybar-{{ polybar.version }}.tar.gz"
     dest: "/tmp/polybar-{{ polybar.version }}.tar.gz"
+
+- name: "Extract polybar-{{ polybar.version }}.tar.gz"
+  unarchive:
+    remote_src: true
+    src: "/tmp/polybar-{{ polybar.version }}.tar.gz"
+    dest: "/tmp/"
+
+- name: Build polybar
+  command: ./build.sh
+  become: false
+  args:
+    chdir: "/tmp/polybar-{{ polybar.version }}"
+    creates: /usr/local/bin/polybar

@@ -1,13 +1,4 @@
 ---
-# - name: Avoid warning "freetype2 will be installed before its harfbuzz"
-#   become: true
-#   package:
-#     name: "{{ item }}"
-#     state: present
-#   with_items:
-#     - freetype2
-#     - harfbuzz
-
 - name: Install polybar
   include_role:
     name: jahrik.yay
