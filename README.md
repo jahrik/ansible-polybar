@@ -1,7 +1,8 @@
-Role Name
-=========
+# Polybar
 
-A brief description of the role goes here.
+[![CICD](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml)
+
+Installs and configures polybar
 
 Requirements
 ------------
@@ -25,12 +26,12 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: jahrik.polybar, x: 42 }
 
 License
 -------
 
-BSD
+GPLv2
 
 Author Information
 ------------------
