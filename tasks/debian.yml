@@ -30,18 +30,20 @@
     - libxcb-icccm4-dev
 
 - name: "Download polybar-{{ polybar.version }}.tar.gz"
+  become: false
   get_url:
     url: "https://github.com/polybar/polybar/releases/download/{{ polybar.version }}/polybar-{{ polybar.version }}.tar.gz"
     dest: "/tmp/polybar-{{ polybar.version }}.tar.gz"
 
 - name: "Extract polybar-{{ polybar.version }}.tar.gz"
+  become: false
   unarchive:
     remote_src: true
     src: "/tmp/polybar-{{ polybar.version }}.tar.gz"
     dest: "/tmp/"
 
 - name: Build polybar
-  command: ./build.sh
+  command: ./build.sh -f --auto
   become: false
   args:
     chdir: "/tmp/polybar-{{ polybar.version }}"
