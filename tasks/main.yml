@@ -1,8 +1,10 @@
 ---
-- ansible.builtin.include_tasks: debian.yml
+- name: Install polybar (Debian)
+  ansible.builtin.include_tasks: debian.yml
   when: ansible_os_family == 'Debian'
 
-- ansible.builtin.include_tasks: archlinux.yml
+- name: Install polybar (Arch)
+  ansible.builtin.include_tasks: archlinux.yml
   when: ansible_os_family == 'Archlinux'
 
 - name: Create ~/.config/polybar
