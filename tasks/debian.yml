@@ -15,8 +15,6 @@
       - cmake
       - cmake-data
       - pkg-config
-      - python3-sphinx
-      - python3-packaging
       - libuv1-dev
       - libcairo2-dev
       - libxcb1-dev
@@ -46,7 +44,7 @@
 
 - name: Build polybar
   become: false
-  ansible.builtin.command: ./build.sh -f --auto -D BUILD_DOC=OFF
+  ansible.builtin.command: ./build.sh -f --auto
   args:
     chdir: "/tmp/polybar-{{ polybar.version }}"
     creates: /usr/local/bin/polybar
