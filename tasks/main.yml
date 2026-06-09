@@ -13,20 +13,18 @@
     mode: '0755'
   tags: [ 'polybar' ]
 
-- name: Generate polybar config files
+- name: Generate polybar config
   become: false
   ansible.builtin.template:
-    src: "{{ item }}.j2"
-    dest: "~/.config/polybar/{{ item }}"
+    src: config.j2
+    dest: ~/.config/polybar/config
     mode: '0644'
-  loop:
-    - launch.sh
-    - config
   tags: [ 'polybar' ]
 
-- name: Make polybar launch.sh executable
+- name: Generate polybar launch script
   become: false
-  ansible.builtin.file:
-    path: "~/.config/polybar/launch.sh"
+  ansible.builtin.template:
+    src: launch.sh.j2
+    dest: ~/.config/polybar/launch.sh
     mode: '0755'
   tags: [ 'polybar' ]
