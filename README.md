@@ -2,38 +2,47 @@
 
 [![CICD](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml)
 
-Installs and configures polybar
+Install and configure [Polybar](https://github.com/polybar/polybar), a fast and easy-to-use status bar. Deploys config and launch script to `~/.config/polybar/`.
 
-Requirements
-------------
+- **Arch Linux**: installs latest from AUR via `jahrik.yay`
+- **Debian/Ubuntu**: builds from source at the version specified in `polybar.version`
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+- Arch Linux: depends on `jahrik.yay` role for AUR package installation
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Role Variables
 
-Dependencies
-------------
+| Variable | Default | Description |
+|---|---|---|
+| `polybar.version` | `3.5.7` | Polybar source version (Debian/Ubuntu only) |
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Dependencies
 
-Example Playbook
-----------------
+- `jahrik.yay` (Arch Linux only)
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+## Example Playbook
 
-    - hosts: servers
-      roles:
-         - { role: jahrik.polybar, x: 42 }
+```yaml
+- hosts: workstations
+  roles:
+    - role: jahrik.polybar
+```
 
-License
--------
+## Testing
+
+```bash
+# Lint
+yamllint .
+
+# Full molecule test (Arch container)
+molecule test
+
+# Iterative
+molecule converge
+molecule destroy
+```
+
+## License
 
 GPLv2
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
