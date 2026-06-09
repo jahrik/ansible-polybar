@@ -46,7 +46,7 @@
 
 - name: Build polybar
   become: false
-  ansible.builtin.command: ./build.sh -f --auto
+  ansible.builtin.command: ./build.sh -f --auto -D BUILD_DOC=OFF
   args:
     chdir: "/tmp/polybar-{{ polybar.version }}"
     creates: /usr/local/bin/polybar
