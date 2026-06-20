@@ -14,6 +14,16 @@
         that: polybar_bin.rc == 0
         fail_msg: "polybar binary not found in PATH"
 
+    - name: Run polybar --version
+      ansible.builtin.command: polybar --version
+      register: polybar_version
+      changed_when: false
+
+    - name: Assert polybar version output
+      ansible.builtin.assert:
+        that: "'polybar' in polybar_version.stdout | lower"
+        fail_msg: "polybar --version did not produce expected output"
+
     - name: Check polybar config
       ansible.builtin.stat:
         path: ~/.config/polybar/config
