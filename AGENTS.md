@@ -18,16 +18,20 @@ Installs and configures [Polybar](https://github.com/polybar/polybar), a fast an
 - `tasks/archlinux.yml` — installs via `jahrik.yay` (AUR)
 - `tasks/debian.yml` — updates apt cache, installs build dependencies, downloads and compiles from source
 
-## Testing Commands
+## Testing
 
 ```bash
-# Lint
+uv sync
+source .venv/bin/activate
 yamllint .
-
-# Full molecule test (Arch container)
+ansible-lint
 molecule test
-
-# Iterative
 molecule converge
 molecule destroy
 ```
+
+## CI
+
+- **Lint**: yamllint + ansible-lint
+- **Molecule**: Arch Linux via Docker (AUR install path)
+- **Release**: publishes to Ansible Galaxy on merge to `main`
