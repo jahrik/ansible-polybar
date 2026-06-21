@@ -30,6 +30,8 @@ Installs [Polybar](https://polybar.github.io/) — a fast and easy-to-use status
 ## Testing
 
 ```bash
+uv sync
+source .venv/bin/activate
 yamllint .
 ansible-lint
 molecule test
