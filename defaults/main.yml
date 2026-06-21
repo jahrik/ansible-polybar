@@ -1,4 +1,6 @@
 ---
+install: true
+
 # Arch installs latest from AUR
 # Ubuntu installs from source and will grab this version
 polybar:
