@@ -18,5 +18,3 @@ galaxy_info:
         - focal
   galaxy_tags:
     - polybar
-dependencies:
-  - role: jahrik.yay
