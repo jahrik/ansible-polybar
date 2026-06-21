@@ -21,6 +21,8 @@ Installs and configures [Polybar](https://github.com/polybar/polybar), a fast an
 ## Testing
 
 ```bash
+uv sync
+source .venv/bin/activate
 yamllint .
 ansible-lint
 molecule test
