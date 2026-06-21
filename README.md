@@ -1,30 +1,28 @@
-# Polybar
+# POLYBAR
 
 [![CICD](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-jahrik.polybar-blue?logo=ansible)](https://galaxy.ansible.com/ui/standalone/roles/jahrik/polybar/)
 
-Install and configure [Polybar](https://github.com/polybar/polybar), a fast and easy-to-use status bar. Deploys config and launch script to `~/.config/polybar/`.
+Installs [Polybar](https://polybar.github.io/) — a fast and easy-to-use status bar ([GitHub](https://github.com/polybar/polybar)) — and deploys config and launch script to `~/.config/polybar/`. Depends on `jahrik.yay` for AUR installation on Arch.
 
-- **Arch Linux**: installs latest from AUR via `jahrik.yay`
-- **Debian/Ubuntu**: builds from source at the version specified in `polybar.version`
+## OS Support
 
-## Requirements
-
-- Arch Linux: depends on `jahrik.yay` role for AUR package installation
+| Platform | Install method |
+|---|---|
+| Arch Linux | AUR via `jahrik.yay` |
+| Debian / Ubuntu | `apt install polybar` |
 
 ## Role Variables
 
 | Variable | Default | Description |
 |---|---|---|
-| `polybar.version` | `3.5.7` | Polybar source version (Debian/Ubuntu only) |
-
-## Dependencies
-
-- `jahrik.yay` (Arch Linux only)
+| `polybar.version` | `3.5.7` | Polybar version (informational; Arch gets latest from AUR, Debian/Ubuntu uses apt) |
 
 ## Example Playbook
 
 ```yaml
-- hosts: workstations
+---
+- hosts: all
   roles:
     - role: jahrik.polybar
 ```
@@ -32,17 +30,23 @@ Install and configure [Polybar](https://github.com/polybar/polybar), a fast and 
 ## Testing
 
 ```bash
-# Lint
 yamllint .
-
-# Full molecule test (Arch container)
+ansible-lint
 molecule test
+```
 
-# Iterative
+Step by step:
+
+```bash
 molecule converge
+molecule verify
 molecule destroy
 ```
 
 ## License
 
 GPLv2
+
+## Author Information
+
+jahrik@gmail.com
