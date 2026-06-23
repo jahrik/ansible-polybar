@@ -16,6 +16,6 @@ provisioner:
   inventory:
     host_vars:
       arch:
-        ansible_user: ansible
+      # No longer needs unprivileged user for yay
 verifier:
   name: ansible
