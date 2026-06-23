@@ -1,22 +1,23 @@
-# POLYBAR
+# ansible-polybar
 
 [![CICD](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml/badge.svg)](https://github.com/jahrik/ansible-polybar/actions/workflows/cicd.yml)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-jahrik.polybar-blue?logo=ansible)](https://galaxy.ansible.com/ui/standalone/roles/jahrik/polybar/)
 
-Installs [Polybar](https://polybar.github.io/) — a fast and easy-to-use status bar ([GitHub](https://github.com/polybar/polybar)) — and deploys config and launch script to `~/.config/polybar/`. Depends on `jahrik.yay` for AUR installation on Arch.
+Installs and configures [Polybar](https://polybar.github.io/), a fast and easy-to-use status bar. On Arch Linux, it installs from AUR via `jahrik.yay`. On Debian/Ubuntu, it installs from source or apt. Deploys `~/.config/polybar/config` and `~/.config/polybar/launch.sh` from templates.
 
-## OS Support
+## Supported OS
 
 | Platform | Install method |
 |---|---|
 | Arch Linux | AUR via `jahrik.yay` |
-| Debian / Ubuntu | `apt install polybar` |
+| Ubuntu / Debian | Source build / `apt` |
 
 ## Role Variables
 
 | Variable | Default | Description |
 |---|---|---|
-| `polybar.version` | `3.5.7` | Polybar version (informational; Arch gets latest from AUR, Debian/Ubuntu uses apt) |
+| `install` | `true` | Set to `false` to uninstall polybar. |
+| `polybar.version` | `3.5.7` | Source version to build on Debian/Ubuntu (Arch always gets latest from AUR) |
 
 ## Example Playbook
 
@@ -37,17 +38,9 @@ ansible-lint
 molecule test
 ```
 
-Step by step:
-
-```bash
-molecule converge
-molecule verify
-molecule destroy
-```
-
 ## License
 
-GPLv2
+MIT
 
 ## Author Information
 

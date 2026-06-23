@@ -4,15 +4,14 @@
   gather_facts: false
   tasks:
     - name: Check polybar binary
-      ansible.builtin.command: which polybar
-      changed_when: false
-      failed_when: false
+      ansible.builtin.stat:
+        path: /usr/bin/polybar
       register: polybar_bin
 
     - name: Assert polybar is installed
       ansible.builtin.assert:
-        that: polybar_bin.rc == 0
-        fail_msg: "polybar binary not found in PATH"
+        that: polybar_bin.stat.exists
+        fail_msg: "polybar binary not found at /usr/bin/polybar"
 
     - name: Run polybar --version
       ansible.builtin.command: polybar --version
