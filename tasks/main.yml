@@ -1,8 +1,24 @@
 ---
 - name: Install polybar
-  ansible.builtin.include_tasks: install.yml
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      tags:
+        - polybar
+        - polybar:install
   when: install | default(true) | bool
+  tags:
+    - polybar
+    - polybar:install
 
 - name: Uninstall polybar
-  ansible.builtin.include_tasks: uninstall.yml
+  ansible.builtin.include_tasks:
+    file: uninstall.yml
+    apply:
+      tags:
+        - polybar
+        - polybar:uninstall
   when: not (install | default(true) | bool)
+  tags:
+    - polybar
+    - polybar:uninstall

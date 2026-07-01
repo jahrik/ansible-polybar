@@ -45,3 +45,34 @@
           - polybar_launch.stat.exists
           - polybar_launch.stat.executable
         fail_msg: "~/.config/polybar/launch.sh not found or not executable"
+
+- name: Verify uninstall
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Run jahrik.polybar with install false
+      ansible.builtin.include_role:
+        name: jahrik.polybar
+      vars:
+        install: false
+
+    - name: Check polybar binary removed
+      ansible.builtin.command: which polybar
+      register: polybar_bin_removed
+      changed_when: false
+      failed_when: false
+
+    - name: Assert polybar binary is removed
+      ansible.builtin.assert:
+        that: polybar_bin_removed.rc != 0
+        fail_msg: "polybar binary still found in PATH after uninstall"
+
+    - name: Check polybar config removed
+      ansible.builtin.stat:
+        path: ~/.config/polybar/config
+      register: polybar_cfg_removed
+
+    - name: Assert polybar config is removed
+      ansible.builtin.assert:
+        that: not polybar_cfg_removed.stat.exists
+        fail_msg: "polybar config still present at ~/.config/polybar/config after uninstall"
