@@ -27,6 +27,21 @@ Installs [Polybar](https://polybar.github.io/) — a fast and easy-to-use status
     - role: jahrik.polybar
 ```
 
+## Tags
+
+Run or skip parts of the role with tags:
+
+```bash
+ansible-playbook playbook.yml --tags polybar:install
+ansible-playbook playbook.yml --skip-tags polybar:uninstall
+```
+
+| Tag | Scope |
+|---|---|
+| `polybar` | All role tasks |
+| `polybar:install` | Install path only |
+| `polybar:uninstall` | Uninstall path only |
+
 ## Testing
 
 ```bash
