@@ -16,4 +16,4 @@ argument_specs:
           version:
             type: str
             default: 3.5.7
-            description: Version installed from source on Debian/Ubuntu; Arch always installs latest from AUR
+            description: Informational only; not currently referenced by any task (Debian installs polybar via apt, Arch via AUR)
